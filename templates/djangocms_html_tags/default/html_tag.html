@@ -1,3 +1,0 @@
-{% load cms_tags %}
-
-<{{ instance.tag }}{% if instance.attributes %} {{ instance.attributes_str }}{% endif %}>{% for plugin in instance.child_plugin_instances %}{% render_plugin plugin %}{% empty %}{{ instance.value|linebreaksbr }}{% endfor %}</{{ instance.tag }}>

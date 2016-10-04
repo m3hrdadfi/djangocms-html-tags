@@ -1,0 +1,10 @@
+{% load cms_tags %}
+
+<form {{ instance.attributes_str }}>
+  {% if is_post %}{% csrf_token %}{% endif %}
+  {% for plugin in instance.child_plugin_instances %}
+    {% render_plugin plugin %}
+  {% empty %}
+    {{ instance.value|safe }}
+  {% endfor %}
+</form>

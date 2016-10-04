@@ -1,7 +1,10 @@
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
-from djangocms_html_tags.models import HTMLTag, HTMLText
 from django.utils.translation import ugettext_lazy as _
+
+from djangocms_html_tags.forms import HTMLFormForm
+from djangocms_html_tags.models import HTMLTag, HTMLText
+from djangocms_html_tags.utils import FormMethod
 
 
 class HTMLTextBase(CMSPluginBase):
@@ -31,6 +34,21 @@ class Heading3Plugin(HTMLTextBase):
     tag = HTMLTag.H3
 
 
+class Heading4Plugin(HTMLTextBase):
+    name = _("Heading 4")
+    tag = HTMLTag.H4
+
+
+class Heading5Plugin(HTMLTextBase):
+    name = _("Heading 5")
+    tag = HTMLTag.H5
+
+
+class Heading6Plugin(HTMLTextBase):
+    name = _("Heading 6")
+    tag = HTMLTag.H6
+
+
 class ParagraphPlugin(HTMLTextBase):
     name = _("Paragraph")
     tag = HTMLTag.P
@@ -43,8 +61,33 @@ class ButtonPlugin(HTMLTextBase):
     allow_children = True
 
 
+class InputPlugin(HTMLTextBase):
+    name = _("Input")
+    tag = HTMLTag.INPUT
+    render_template = 'djangocms_html_tags/input.html'
+
+
+class FormPlugin(HTMLTextBase):
+    name = _("Form")
+    tag = HTMLTag.FORM
+    model = HTMLText
+    form = HTMLFormForm
+    fields = (('method', 'action'), 'value', 'attributes')
+    render_template = 'djangocms_html_tags/form.html'
+    allow_children = True
+
+    def render(self, context, instance, placeholder):
+        context.update({'is_post': instance.attributes.get('method') == FormMethod.POST})
+        return super(FormPlugin, self).render(context, instance, placeholder)
+
+
 plugin_pool.register_plugin(Heading1Plugin)
 plugin_pool.register_plugin(Heading2Plugin)
 plugin_pool.register_plugin(Heading3Plugin)
+plugin_pool.register_plugin(Heading4Plugin)
+plugin_pool.register_plugin(Heading5Plugin)
+plugin_pool.register_plugin(Heading6Plugin)
 plugin_pool.register_plugin(ParagraphPlugin)
 plugin_pool.register_plugin(ButtonPlugin)
+plugin_pool.register_plugin(InputPlugin)
+plugin_pool.register_plugin(FormPlugin)
