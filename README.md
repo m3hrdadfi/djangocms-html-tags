@@ -10,3 +10,10 @@ $ pip install virtualenv
 $ virtualenv venv
 $ (venv) pip install -r demo/requirements.txt
 ```
+
+Demo user:
+
+```
+username: admin
+password: admin
+```
