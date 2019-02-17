@@ -1,0 +1,7 @@
+version: '3'
+services:
+  backend:
+    volumes:
+      - ..:/code
+    ports:
+      - 8000:8000
