@@ -1,0 +1,6 @@
+djangocms-helper
+ipython
+ipdb
+autopep8
+pylint
+coverage

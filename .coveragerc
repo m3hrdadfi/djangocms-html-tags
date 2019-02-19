@@ -1,5 +1,5 @@
 [run]
-source = .
+source = djangocms_html_tags
 omit =
-    */demo/*
-    */setup.py
+    migrations/
+    tests/

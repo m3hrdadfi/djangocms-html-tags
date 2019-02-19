@@ -48,8 +48,8 @@ docker() {
 
 runtests() {
     test_command="'
-        coverage run manage.py test --noinput &&
-        coverage html --skip-covered
+        coverage run setup.py test &&
+        coverage html
     '"
     docker_command run --rm backend sh -c ${test_command}
 }

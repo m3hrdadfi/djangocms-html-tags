@@ -55,7 +55,7 @@ function Start-Runserver ([string] $subParams) {
 
 function Start-Runtests ([string] $subParams) {
     $test_command = "'
-        coverage run manage.py test --noinput &&
+        coverage run setup.py test &&
         coverage html
     '"
     Start-Docker "run --rm backend sh -c $test_command"

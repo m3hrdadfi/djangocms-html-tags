@@ -4,7 +4,7 @@ RUN apt-get install -y gettext
 ENV PYTHONUNBUFFERED 1
 RUN mkdir /code
 WORKDIR /code
-ADD demo/requirements.txt /code/
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+ADD tests/requirements.txt /code/
+RUN python -m pip install --upgrade pip
+RUN python -m pip install -r requirements.txt
 ADD . /code/
