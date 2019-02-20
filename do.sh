@@ -16,7 +16,6 @@ print_help() {
     echo ""
     echo -e "${BLUE}Available commands${NORMAL}"
     echo -e "  > docker [:command]      Run a Docker command."
-    echo -e "  > runserver              Run the test server."
     echo -e "  > runtests               Run unit tests."
     echo -e "  > shell                  Open Bash session in the backend service."
 }
@@ -52,10 +51,6 @@ runtests() {
         coverage html
     '"
     docker_command run --rm backend sh -c ${test_command}
-}
-
-runserver() {
-    docker_command run --rm --service-ports --entrypoint /code/docker/backend/entrypoint.sh backend python manage.py runserver 0:8000
 }
 
 shell() {

@@ -27,7 +27,6 @@ function Get-Help {
 
     Write-Host -ForegroundColor Cyan "Available commands"
     Write-Output "  > docker [:command]      Run a Docker command."
-    Write-Output "  > runserver              Run the test server."
     Write-Output "  > runtests               Run unit tests."
     Write-Output "  > shell                  Open Bash session in the backend service."
 }
@@ -47,10 +46,6 @@ function Start-Docker ([string] $subParams) {
     Write-Output ""
 
     Invoke-Expression $command
-}
-
-function Start-Runserver ([string] $subParams) {
-    Start-Docker "run --rm --service-ports --entrypoint /code/docker/backend/entrypoint.sh backend python manage.py runserver 0:8000"
 }
 
 function Start-Runtests ([string] $subParams) {
@@ -88,7 +83,6 @@ if ($param -ne "help") {
 <# We use switch instead of alias because there are some constant variables like `start`. #>
 switch ($param) {
     "docker" { Start-Docker $subParams }
-    "runserver" { Start-Runserver $subParams }
     "runtests" { Start-Runtests $subParams }
     "shell" { Start-Shell $subParams }
     Default { Get-Help }

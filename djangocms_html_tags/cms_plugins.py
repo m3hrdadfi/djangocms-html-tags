@@ -2,7 +2,7 @@ from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import ugettext_lazy as _
 
-from djangocms_html_tags.forms import HTMLFormForm
+from djangocms_html_tags.forms import HTMLTextInputForm, HTMLFormForm, HTMLTextareaForm
 from djangocms_html_tags.models import HTMLTag, HTMLText
 from djangocms_html_tags.utils import FormMethod
 
@@ -12,6 +12,7 @@ class HTMLTextBase(CMSPluginBase):
     module = _("HTML Tags")
     render_template = 'djangocms_html_tags/html_text.html'
     fields = ('value', 'attributes')
+    form = HTMLTextInputForm
     tag = None
 
     def save_model(self, request, obj, form, change):
@@ -52,6 +53,7 @@ class Heading6Plugin(HTMLTextBase):
 class ParagraphPlugin(HTMLTextBase):
     name = _("Paragraph")
     tag = HTMLTag.P
+    form = HTMLTextareaForm
     allow_children = True
 
 
